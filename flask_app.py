@@ -1,3 +1,5 @@
+print('1')
+
 import re
 import json
 import base64
@@ -11,9 +13,14 @@ from fastai.vision.all import imagenet_stats
 
 from flask import Flask, render_template, request, jsonify
 
+print('1')
+
 from finetune import load_labels, load_model
+print('2')
+
 app = Flask(__name__)
 
+print('3')
 
 def classify(img_data, model, labels):
     """Transform image to tensor and get prediction"""
@@ -58,6 +65,12 @@ def predict():
 
 
 if __name__ == "__main__":
+    print('4')
+
     _, labels = load_labels()
+    print('5')
+
     model = load_model(finetune=False, name='vit-woof')
+    print('6')
+
     app.run()
