@@ -17,7 +17,9 @@
 
 ## Полученные метрики
 
-![vit_training.png](images/vit_training.png) 
+<div>
+<img src="images/xres_training.png" width="400"/>
+</div>
 
 Validation accuracy = 0.93  
 https://forums.fast.ai/t/training-loss-and-training-set-accuracy/14302/7
@@ -40,5 +42,18 @@ Confusion matrix
 ('Beagle', 'English foxhound', 20)]
 ```
 
+## Предобученные модели
+[models/vit_woof.pt](models/vit_woof.pt)  
+[models/xresnet50.pt](models/xresnet50.pt) 
 
+Обучал в Google Colab:
 
+[vit_woof.ipynb](https://colab.research.google.com/drive/1X8bF_OliMbhXSbBDmF5_xDP9sOVCTKoQ?usp=sharing)  
+[xresnet50.ipynb](https://colab.research.google.com/drive/1787evNp1XP9WvK01ibh_9lEGPFqWufXG?usp=sharing)
+
+## Использованные репозитории
+https://github.com/liuyao12/imagenette_experiments  
+https://github.com/walkwithfastai/walkwithfastai.github.io/blob/master/nbs/course2020/vision/04_ImageWoof.ipynb
+https://github.com/ayasyrev/imagenette_experiments
+https://github.com/Ys-Prakash/Vit-vs-xresnet/blob/master/ViT_Large_adam.ipynb
+https://github.com/imfing/keras-flask-deploy-webapp
