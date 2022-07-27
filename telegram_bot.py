@@ -1,11 +1,17 @@
 import os
-import telebot
+import argparse
 
+import telebot
 from flask_app import classify
 from finetune import load_labels, load_model
 
-API_TOKEN = '5575577930:AAFMjSEeVIQz0rwMywi92Y_tzWcKc7xXctk'
-bot = telebot.TeleBot(API_TOKEN)
+# get telegram API token from console
+parser = argparse.ArgumentParser()
+parser.add_argument('token', help='telegram bot token to access the HTTP API')
+parser.add_argument('-n', '--model_name', default='vit-woof.pt', help='name of the model to load from /models')
+
+args = parser.parse_args()
+bot = telebot.TeleBot(args.token)
 
 welcome_text = '''
 Hi there!\nI classify doggies of the following breeds:
@@ -20,7 +26,7 @@ Golden retriever,
 Old English sheepdog,
 Samoyed,
 Dingo.
-    
+
 Send me a picture of one of these.
 '''
 
@@ -37,22 +43,28 @@ def need_photo(message):
 
 @bot.message_handler(content_types=['photo'])
 def guess_breed(message):
+    # get image info
     bot.send_message(message.chat.id, 'Let me think...')
     img_info = bot.get_file(message.photo[-1].file_id)
+
+    # temporarily download image
     downloaded_img = bot.download_file(img_info.file_path)
     img_path = f'images/{message.photo[-1].file_id}'
 
+    # open image locally and classify
     with open(img_path, 'wb') as new_file:
         new_file.write(downloaded_img)
-
     pred = classify(img_path, model, labels)
 
+    # show result
     bot.send_message(message.chat.id, pred)
+
+    # delete image
     os.remove(img_path)
 
 
 if __name__ == "__main__":
     _, labels = load_labels()
-    model = load_model(finetune=False, name='vit-woof')
-    print('Bot ready.')
+    model = load_model(finetune=False, name=args.model_name)
+    print('Bot ready')
     bot.polling(none_stop=True)

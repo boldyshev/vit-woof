@@ -226,6 +226,7 @@ pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1635333100036/work
 pyparsing @ file:///tmp/build/80754af9/pyparsing_1635766073266/work
 pyrsistent @ file:///tmp/build/80754af9/pyrsistent_1636110951836/work
 PySocks @ file:///tmp/build/80754af9/pysocks_1605305812635/work
+pyTelegramBotAPI==4.6.0
 pytest==7.1.1
 python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
 python-lsp-black @ file:///tmp/build/80754af9/python-lsp-black_1634232156041/work
@@ -292,6 +293,7 @@ tables @ file:///tmp/build/80754af9/pytables_1607975397488/work
 tabulate==0.8.9
 TBB==0.2
 tblib @ file:///Users/ktietz/demo/mc3/conda-bld/tblib_1629402031467/work
+telebot==0.0.4
 tenacity @ file:///tmp/build/80754af9/tenacity_1626248292117/work
 terminado @ file:///tmp/build/80754af9/terminado_1644322582718/work
 testpath @ file:///tmp/build/80754af9/testpath_1624638946665/work

@@ -1,11 +1,8 @@
-print('1')
-
 import re
-import json
 import base64
 from io import BytesIO
+import argparse
 
-import timm
 import torch
 import torchvision.transforms as T
 from PIL import Image
@@ -13,14 +10,10 @@ from fastai.vision.all import imagenet_stats
 
 from flask import Flask, render_template, request, jsonify
 
-print('1')
-
 from finetune import load_labels, load_model
-print('2')
 
 app = Flask(__name__)
 
-print('3')
 
 def classify(img_data, model, labels):
     """Transform image to tensor and get prediction"""
@@ -65,12 +58,9 @@ def predict():
 
 
 if __name__ == "__main__":
-    print('4')
-
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-n', '--model_name', default='vit-woof.pt', help='name of the model to load from /models')
+    args = parser.parse_args()
     _, labels = load_labels()
-    print('5')
-
-    model = load_model(finetune=False, name='vit-woof')
-    print('6')
-
-    app.run()
+    model = load_model(finetune=False, name=args.model_name)
+    app.run(host='0.0.0.0')

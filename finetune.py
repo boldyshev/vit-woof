@@ -1,8 +1,6 @@
-import json
 import argparse
 
 import timm
-import torch
 from fastai.vision.all import *
 
 
@@ -34,7 +32,7 @@ def fastai_dataloader(breed_labels, batch_size):
     return dls
 
 
-def load_model(finetune=True, name='vit-woof'):
+def load_model(finetune=True, name='vit-woof.pt'):
     print('Loading vision model...', end=' ')
     model = timm.create_model('vit_large_patch16_224',
                               pretrained=finetune,
@@ -42,7 +40,7 @@ def load_model(finetune=True, name='vit-woof'):
                               drop_rate=0.2,
                               attn_drop_rate=0.2)
     if not finetune:
-        model_path = f'models/{name}.pt'
+        model_path = f'models/{name}'
         model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
         model = torch.nn.Sequential(
             model,
@@ -56,10 +54,10 @@ def main():
     """Finetune vision transformer, pretrained on ImageNet"""
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('model_name')
-    parser.add_argument('--epochs', default=1, type=int)
-    parser.add_argument('--lr', default=1e-4, type=float)
-    parser.add_argument('--bs', default=8, type=int)
+    parser.add_argument('model_name', help='name of the model, saves to /models')
+    parser.add_argument('--epochs', default=1, type=int, help='epochs number')
+    parser.add_argument('--lr', default=1e-4, type=float, help='learning rate')
+    parser.add_argument('--bs', default=8, type=int, help='batch size')
     args = parser.parse_args()
 
     breed_labels, _ = load_labels()
@@ -74,7 +72,7 @@ def main():
     learn.fit_one_cycle(args.epochs, lr_max=args.lr)
 
     # save
-    model_path = f'models/{args.model_name}.pt'
+    model_path = f'models/{args.model_name}'
     torch.save(model.state_dict(), model_path)
 
 
