@@ -70,7 +70,7 @@ https://github.com/boldyshev/vit-woof/blob/master/models/xresnet50.pt (кноп�
 ### Локальный запуск
 
 ```
-conda create -f environment.yml
+conda env create -f environment.yml
 conda activate vit-woof
 pip install -r requirements.txt
 ```
