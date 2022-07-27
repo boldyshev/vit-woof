@@ -62,7 +62,7 @@ git clone https://github.com/boldyshev/vit-woof
 ```
 
 Без установки git-lfs предобученные веса  [models/vit_woof.pt](models/vit_woof.pt) можно скачать по ссылке
-https://github.com/boldyshev/vit-woof/blob/master/models/xresnet50.pt (кнопка Download).
+https://github.com/boldyshev/vit-woof/blob/master/models/vit_woof.pt (кнопка Download).
 Файл необходимо поместить в папку /models.
 Если вы не хотите скачивать файл vit_woof.pt, вы можете локально дообучить предобученный трансформер из репозитория
 [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) (инструкция ниже):
@@ -76,7 +76,7 @@ pip install -r requirements.txt
 ```
 Дообучить модель
 ```
-# the model will be saved to /models/MODEL_NAME.pt
+# the model will be saved to /models/MODEL_NAME
 python finetune.py MODEL_NAME
 ```
 
