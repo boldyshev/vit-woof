@@ -91,12 +91,12 @@ docker run -it --rm -p 5000:5000 IMG_NAME
 
 Flask app
 ```
-python flask_app.py --model_name MODEL_NAME
+python flask_app.py -n MODEL_NAME
 ```
 
 Telegram бот
 ```
-python telegram_bot.py TOKEN
+python telegram_bot.py TOKEN -n MODEL_NAME
 ```
 
 
