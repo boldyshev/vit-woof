@@ -1,3 +1,7 @@
+"""Local finetuning of Vision Transformer pretrained on ImageNet
+(from https://github.com/rwightman/pytorch-image-models)
+"""
+
 import argparse
 
 import timm
@@ -5,7 +9,8 @@ from fastai.vision.all import *
 
 
 def load_labels():
-    """Load number labels to breeds dict"""
+    """Load mapping of number labels to breeds"""
+
     with open('breed_labels.json') as json_file:
         breed_labels = json.load(json_file)
     labels = sorted(breed_labels.values())
@@ -14,7 +19,7 @@ def load_labels():
 
 
 def fastai_dataloader(breed_labels, batch_size):
-    """Create ImageWoof dataloader with fastai. """
+    """Create ImageWoof dataloader with fastai."""
 
     # define transformations. Images resized to 224x224
     tfms = [[PILImage.create], [parent_label, breed_labels.__getitem__, Categorize()]]
@@ -51,8 +56,8 @@ def load_model(finetune=True, name='vit-woof.pt'):
 
 
 def main():
-    """Finetune vision transformer, pretrained on ImageNet"""
 
+    # get arguments from console
     parser = argparse.ArgumentParser()
     parser.add_argument('model_name', help='name of the model, saves to /models')
     parser.add_argument('--epochs', default=1, type=int, help='epochs number')
@@ -60,6 +65,7 @@ def main():
     parser.add_argument('--bs', default=8, type=int, help='batch size')
     args = parser.parse_args()
 
+    # load
     breed_labels, _ = load_labels()
     dataset_downloader = fastai_dataloader(breed_labels, args.bs)
     model = load_model()
