@@ -47,7 +47,7 @@ Confusion matrix
 
 ## Локальный запуск
 Обе модели имеют объем 1.2 GB, ограничение github -- 50 МB на один файл. 
-Большие файлы можно загружать искачивать установив [git lfs](https://git-lfs.github.com/):
+Большие файлы можно загружать искачивать, установив [git lfs](https://git-lfs.github.com/):
 
 ```
 # add repository
@@ -57,25 +57,33 @@ curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.s
 sudo apt-get install git-lfs
 git lfs install
 ```
-Затем при клонировании репозитория загрузятся большие файлы.
+После этого предобученные модели загрузятся при клонировании репозитория.
 ```
 git clone https://github.com/boldyshev/vit-woof
+
+# go to project directory
+cd vit-woof
 ```
 Если вы не хотите устанавливать git lfs, можно скачать модели по ссылке:
 ```
-
+# the files need to reside in vit-woof/models directory
+wget https://github.com/boldyshev/vit-woof/raw/master/models/vit-dog.pt
+wget https://github.com/boldyshev/vit-woof/raw/master/models/vit-woof.pt
 ```
 
+### Запуск Flask приложения в docker контейнере
 
+```
+docker build -t IMG_NAME .
+docker run -it --rm -p 5000:5000 IMG_NAME
+```
+Перейти по http://localhost:5000/
 
-
-Без установки git-lfs предобученные веса  [models/vit_woof.pt](models/vit_woof.pt) можно скачать по ссылке
-https://github.com/boldyshev/vit-woof/blob/master/models/vit_woof.pt (кнопка Download).
-Файл необходимо поместить в папку /models.
-Если вы не хотите скачивать файл vit_woof.pt, вы можете локально дообучить предобученный трансформер из репозитория
+Если вы не хотите скачивать предобученные модели, вы можете локально дообучить предобученный трансформер из репозитория
 [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) (инструкция ниже):
 
-### Локальный запуск
+
+### Создание виртуальной среды
 
 ```
 conda env create -f environment.yml
@@ -89,15 +97,6 @@ pip install telebot pyTelegramBotAPI
 python finetune.py MODEL_NAME
 ```
 
-### Запуск Flask приложения в docker контейнере
-
-```
-docker build -t IMG_NAME .
-docker run -it --rm -p 5000:5000 IMG_NAME
-```
-Перейти по http://localhost:5000/
-
-
 Flask app
 ```
 python flask_app.py -n MODEL_NAME
@@ -108,13 +107,7 @@ Telegram бот
 python telegram_bot.py TOKEN -n MODEL_NAME
 ```
 
-
-
-### Предобученные модели
-[models/vit_woof.pt](models/vit_woof.pt)  
-[models/xresnet50.pt](models/xresnet50.pt) 
-
-Обучал в Google Colab:
+### Обучал в Google Colab:
 
 [vit_woof.ipynb](https://colab.research.google.com/drive/1X8bF_OliMbhXSbBDmF5_xDP9sOVCTKoQ?usp=sharing)  
 [xresnet50.ipynb](https://colab.research.google.com/drive/1787evNp1XP9WvK01ibh_9lEGPFqWufXG?usp=sharing)
