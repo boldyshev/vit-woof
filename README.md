@@ -7,18 +7,23 @@
 
 Датасет [ImageWoof](https://github.com/fastai/imagenette#imagewoof)
 
-## Архитектура: Vision Transformer
+## Пайплайн
+В пайплайне 2 модели: первая классифицирует собак и не собак, 
+вторая определяет одну из 10 пород ImageWoof. Обе модели Vision Transformer: первый 
+пердобучен на 1000 классах ImageNet, второй -- он же, дообученный на 10 классах ImageWoof.
 
-Причины:
-- На июль 2022 лидирует в классификации [ImageNet](https://www.google.com/search?q=imagenet+leaderboard&oq=imagenet&aqs=chrome.1.69i59l2j0i512l3j69i60l3.1709j0j7&sourceid=chrome&ie=UTF-8)
-- Дает лучший результат, чем архитектуры из 
+## Выбор архитектуры
+
+- На июль 2022 модели на основе Vision Transformer лидируют в классификации [ImageNet](https://www.google.com/search?q=imagenet+leaderboard&oq=imagenet&aqs=chrome.1.69i59l2j0i512l3j69i60l3.1709j0j7&sourceid=chrome&ie=UTF-8)
+- Vision Transformer лучший результат, чем архитектуры из 
 [leaderboard ImageWoof](https://github.com/fastai/imagenette#imagewoof-leaderboard) на 2020-21
   (cм. сравнение в [pipeline.ipynb](pipeline.ipynb) )
 
 ## Полученные метрики
 
+Точность классификации ImageWoof:
 <div>
-<img src="images/xres_training.png" width="400"/>
+<img src="images/vit_training.png" width="400"/>
 </div>
 
 [Validation accuracy](https://forums.fast.ai/t/training-loss-and-training-set-accuracy/14302/7) = 0.93  
@@ -27,9 +32,6 @@
 Предобученная на ImageNet модель ```vit_large_patch16_224``` из репозитория
 [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) дообучилась до этих значений за одну эпоху.
 
-
-## Разведочный анализ
-???
 
 ## Анализ ошибок
 
@@ -43,9 +45,9 @@ Confusion matrix
 ('Beagle', 'English foxhound', 20)]
 ```
 
-## Размер обученной модели
-Сохраненные параметры модели [models/vit_woof.pt](models/vit_woof.pt) имеет объем 1.2 GB, чтобы скачать ее c github командой clone
-необходимо установить git-lfs (large file storage)
+## Локальный запуск
+Обе модели имеют объем 1.2 GB, ограничение github -- 50 МB на один файл. 
+Большие файлы можно загружать искачивать установив [git lfs](https://git-lfs.github.com/):
 
 ```
 # add repository
@@ -55,11 +57,17 @@ curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.s
 sudo apt-get install git-lfs
 git lfs install
 ```
-
-Затем можно скачивать репозиторий
+Затем при клонировании репозитория загрузятся большие файлы.
 ```
 git clone https://github.com/boldyshev/vit-woof
 ```
+Если вы не хотите устанавливать git lfs, можно скачать модели по ссылке:
+```
+
+```
+
+
+
 
 Без установки git-lfs предобученные веса  [models/vit_woof.pt](models/vit_woof.pt) можно скачать по ссылке
 https://github.com/boldyshev/vit-woof/blob/master/models/vit_woof.pt (кнопка Download).
@@ -72,7 +80,8 @@ https://github.com/boldyshev/vit-woof/blob/master/models/vit_woof.pt (кнопк
 ```
 conda env create -f environment.yml
 conda activate vit-woof
-pip install -r requirements.txt
+pip install telebot pyTelegramBotAPI
+
 ```
 Дообучить модель
 ```
