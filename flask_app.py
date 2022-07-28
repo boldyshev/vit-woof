@@ -42,7 +42,7 @@ def output(img_path, model_dog, model_breed):
     """Predicts breed if inout is a dof image, otherwise returns 'Not a dog'"""
 
     # In ImageNet dogs have labels from 151 to 268
-    dog_image = predict(img_path, model_dog) in range(151, 269)
+    dog_image = predict(img_path, model_dog) in range(151, 276)
     if dog_image:
         idx = predict(img_path, model_breed)
         result = labels[idx]
@@ -83,6 +83,5 @@ if __name__ == "__main__":
     model_dog = load_model(finetune=False, name=args.model_dog, num_classes=1000)
 
     model_breed = load_model(finetune=False, name=args.model_breed)
-
 
     app.run(host='0.0.0.0')
