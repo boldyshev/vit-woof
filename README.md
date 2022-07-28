@@ -44,13 +44,18 @@
 
 Confusion matrix
 
-![vit_conf.png](images/vit_conf.png) 
+<div>
+<img src="images/vit_conf.png" width="700"/>
+</div>
 
 Наиболее частые ошибки
 ```
 [('English foxhound', 'Beagle', 41), 
 ('Beagle', 'English foxhound', 20)]
 ```
+Чаще всего ошибочно English foxhound вместо Beagle.
+Если подать на вход изображение собаки не принадлежащей к одной из 10 пород ImageWoof, 
+модель все-равно распределит ее в один из этих классов
 
 ## Локальный запуск
 Обе модели имеют объем 1.2 GB, ограничение github -- 50 МB на один файл. 
@@ -64,16 +69,16 @@ curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.s
 sudo apt-get install git-lfs
 git lfs install
 ```
-После этого предобученные модели загрузятся при клонировании репозитория.
+После этого предобученные модели загрузятся при клонировании репозитория:
 ```
 git clone https://github.com/boldyshev/vit-woof
 
 # go to project directory
 cd vit-woof
 ```
-Если вы не хотите устанавливать git lfs, можно скачать модели по ссылке:
+Если вы не хотите устанавливать git lfs, можно скачать модели по ссылке.
+Файлы должны находиться в ```vit-woof/models```:
 ```
-# the files need to reside in vit-woof/models directory
 wget https://github.com/boldyshev/vit-woof/raw/master/models/vit-dog.pt
 wget https://github.com/boldyshev/vit-woof/raw/master/models/vit-woof.pt
 ```
