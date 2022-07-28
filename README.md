@@ -15,9 +15,9 @@
 ## Выбор архитектуры
 
 - На июль 2022 модели на основе Vision Transformer лидируют в классификации [ImageNet](https://www.google.com/search?q=imagenet+leaderboard&oq=imagenet&aqs=chrome.1.69i59l2j0i512l3j69i60l3.1709j0j7&sourceid=chrome&ie=UTF-8)
-- Vision Transformer лучший результат, чем архитектуры из 
-[leaderboard ImageWoof](https://github.com/fastai/imagenette#imagewoof-leaderboard) на 2020-21
-  (cм. сравнение в [pipeline.ipynb](pipeline.ipynb) )
+- Vision Transformer дает лучший результат, чем архитектуры из 
+[Imagewoof Leaderboard](https://github.com/fastai/imagenette#imagewoof-leaderboard) на 2020-21
+  (cм. сравнение в [arch-compare.ipynb](pipeline.ipynb) )
 
 ## Полученные метрики
 
@@ -54,7 +54,7 @@ Confusion matrix
 ('Beagle', 'English foxhound', 20)]
 ```
 Чаще всего ошибочно ошибочно определяет English foxhound вместо Beagle.
-Если подать на вход изображение собаки не принадлежащей к одной из 10 пород ImageWoof, 
+Если подать на вход изображение собаки, не принадлежащей к одной из 10 пород ImageWoof, 
 модель все-равно распределит ее в один из этих классов
 
 ## Локальный запуск
@@ -89,7 +89,7 @@ wget https://github.com/boldyshev/vit-woof/raw/master/models/vit-woof.pt
 docker build -t IMG_NAME .
 docker run -it --rm -p 5000:5000 IMG_NAME
 ```
-Перейти по http://localhost:5000/
+Перейти по http://localhost:5000/.
 
 Если вы не хотите скачивать предобученные модели, вы можете локально дообучить предобученный трансформер из репозитория
 [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) (инструкция ниже):
