@@ -53,7 +53,7 @@ Confusion matrix
 [('English foxhound', 'Beagle', 41), 
 ('Beagle', 'English foxhound', 20)]
 ```
-Чаще всего ошибочно English foxhound вместо Beagle.
+Чаще всего ошибочно ошибочно определяет English foxhound вместо Beagle.
 Если подать на вход изображение собаки не принадлежащей к одной из 10 пород ImageWoof, 
 модель все-равно распределит ее в один из этих классов
 
