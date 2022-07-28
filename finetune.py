@@ -37,11 +37,10 @@ def fastai_dataloader(breed_labels, batch_size):
     return dls
 
 
-def load_model(finetune=True, name='vit-woof.pt'):
-    print('Loading vision model...', end=' ')
+def load_model(finetune=True, name='vit-woof.pt', num_classes=10):
     model = timm.create_model('vit_large_patch16_224',
                               pretrained=finetune,
-                              num_classes=10,
+                              num_classes=num_classes,
                               drop_rate=0.2,
                               attn_drop_rate=0.2)
     if not finetune:

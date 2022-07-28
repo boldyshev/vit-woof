@@ -28,9 +28,16 @@
 
 [Validation accuracy](https://forums.fast.ai/t/training-loss-and-training-set-accuracy/14302/7) = 0.93  
 
-
 Предобученная на ImageNet модель ```vit_large_patch16_224``` из репозитория
 [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) дообучилась до этих значений за одну эпоху.
+
+## Разведочный анализ
+Датасет ImageWoof содержит изображения 10 классов собак, является подмножеством ImageNet, который 
+содержит 1000 классов, из них собаки cосредоточены между 151 и 268 классами 
+([ImageNet Classes](https://deeplearning.cms.waikato.ac.nz/user-guide/class-maps/IMAGENET/)).
+Модели, предобученные на ImageNet достаточно хорошо определяют наличие собаки на картинке, но недостаточно
+хорошо различают 10 искомых классов ImageWoof.
+
 
 
 ## Анализ ошибок

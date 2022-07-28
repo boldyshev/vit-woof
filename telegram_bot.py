@@ -9,8 +9,13 @@ from finetune import load_labels, load_model
 # get telegram API token from console
 parser = argparse.ArgumentParser()
 parser.add_argument('token', help='telegram bot token to access the HTTP API')
-parser.add_argument('-n', '--model_name', default='vit-woof.pt', help='name of the model to load from /models')
+parser.add_argument('-dn', '--model_dog', default='vit-dog.pt',
+                    help='name of the model to predict dogs')
+parser.add_argument('-bn', '--model_breed', default='vit-woof.pt',
+                    help='name of the model to predict breeds')
 args = parser.parse_args()
+bot = telebot.TeleBot(args.token)
+
 
 welcome_text = '''
 Hi there!\nI classify doggies of the following breeds:
@@ -66,8 +71,9 @@ def guess_breed(message):
 
 
 if __name__ == "__main__":
-    model_dog = timm.create_model('vit_large_patch16_224', pretrained=True)
-    model_breed = load_model(finetune=False, name=args.model_name)
+    model_dog = load_model(finetune=False, name=args.model_dog, num_classes=1000)
+    model_breed = load_model(finetune=False, name=args.model_breed)
+    model_breed.eval()
 
     print('Bot ready')
     bot.polling(none_stop=True)

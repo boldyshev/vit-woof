@@ -31,6 +31,7 @@ def predict(img_data, model):
     resized_img = transform(img).unsqueeze(0)
 
     # predict
+    model.eval()
     preds = model.forward(resized_img).squeeze(0)
     idx = torch.argmax(preds)
 
@@ -64,8 +65,8 @@ def submit():
         image_data = re.sub('^data:image/.+;base64,', '', request.json)
         image_data = BytesIO(base64.b64decode(image_data))
 
-        # result = output(image_data, model_dog, model_breed)
-        result = 'lala'
+        result = output(image_data, model_dog, model_breed)
+
         # serialize the result, you can add additional fields
         return jsonify(result=result)
 
@@ -74,8 +75,14 @@ def submit():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-n', '--model_name', default='vit-woof.pt', help='name of the model to load from /models')
+    parser.add_argument('-dn', '--model_dog', default='vit-dog.pt',
+                        help='name of the model to predict dogs')
+    parser.add_argument('-bn', '--model_breed', default='vit-woof.pt',
+                        help='name of the model to predict breeds')
     args = parser.parse_args()
-    # model_dog = timm.create_model('vit_large_patch16_224', pretrained=True)
-    model_breed = load_model(finetune=False, name=args.model_name)
+    model_dog = load_model(finetune=False, name=args.model_dog, num_classes=1000)
+
+    model_breed = load_model(finetune=False, name=args.model_breed)
+
+
     app.run(host='0.0.0.0')
