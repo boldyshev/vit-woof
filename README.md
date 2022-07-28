@@ -17,7 +17,7 @@
 - На июль 2022 модели на основе Vision Transformer лидируют в классификации [ImageNet](https://www.google.com/search?q=imagenet+leaderboard&oq=imagenet&aqs=chrome.1.69i59l2j0i512l3j69i60l3.1709j0j7&sourceid=chrome&ie=UTF-8)
 - Vision Transformer дает лучший результат, чем архитектуры из 
 [Imagewoof Leaderboard](https://github.com/fastai/imagenette#imagewoof-leaderboard) на 2020-21
-  (cм. сравнение в [arch-compare.ipynb](arch-compare.ipynb) )
+  (cм. сравнение в [arch_compare.ipynb](arch_compare.ipynb) )
 
 ## Полученные метрики
 
