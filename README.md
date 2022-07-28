@@ -9,7 +9,7 @@
 
 ## Пайплайн
 Используется 2 модели: первая определяет, есть ли на изображении собака, 
-вторая определяет одну из 10 пород ImageWoof. Обе модели Vision Transformer: первый 
+вторая определяет одну из 10 пород ImageWoof. Обе модели Vision Transformer([pytorch-image-models](https://github.com/rwightman/pytorch-image-models)): первый 
 пердобучен на 1000 классах ImageNet, второй -- он же, дообученный на 10 классах ImageWoof.
 
 ## Выбор архитектуры
